@@ -2,11 +2,7 @@ USERNAME:=$(shell git config user.name)
 REMOTE_URL:=git@github.com:$(USERNAME)/repo-scripts.git
 
 all:
-	find -H ~/git -type d -mindepth 1 -maxdepth 1 ! -name "repo-scripts" -exec ln -hfns ~/git/repo-scripts/scripts {}/.scripts \;
-	# known-issue: not expandable for this repo in IDE (Sublime)
-	git init
-	git add -A
-	git commit -m 'new';:
-	git remote add "origin" "$(REMOTE_URL)";:
-	git push -f --all origin
-
+	# 1) create static copy to prevent accidental edit&commits
+	rsync --delete -a scripts/ ~/.repo-scripts
+	# 2) make symlinks
+	find -H ~/git -type d -mindepth 1 -maxdepth 1 -exec ln -hfns ~/.repo-scripts {}/.scripts \;

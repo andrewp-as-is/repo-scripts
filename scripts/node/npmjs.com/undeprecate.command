@@ -1,4 +1,5 @@
-#!/usr/bin/open -a Terminal
+#!/usr/bin/env bash
 { set +x; } 2>/dev/null
 
-( set -x; repo-npm-undeprecate )
+name="$(node -e "console.log(require('./package.json').name);")" || exit
+( set -x; npm deprecate "$name" '' )

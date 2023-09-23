@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 { set +x; } 2>/dev/null
 
-( set -x; bash -l ~/.repo-scripts/web/run )
+( set -x; git add -A && git add -u )
