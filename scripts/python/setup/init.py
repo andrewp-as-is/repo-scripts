@@ -2,15 +2,11 @@
 import datetime
 import os
 import sys
-import requests
 
 name = os.path.basename(os.getcwd()).replace('.py','')
-version = datetime.datetime.now().strftime('%y-%m-%d')
-url="https://pypi.org/pypi/%s/json" % name
-r = requests.get(url)
-if r.status_code==200:
-    version = r.json()['info']['version']
-
+version = '0.0.0'
+if os.path.exists('.pypi-metadata/version.txt'):
+    version = open('.pypi-metadata/version.txt').read().strip()
 code = """
 import setuptools
 

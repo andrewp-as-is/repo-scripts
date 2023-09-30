@@ -8,4 +8,4 @@ url="https://github.com/$fullname"
 
 curl -f -I -s --max-time 5 -o /dev/null "$url" && echo "SKIP: $url EXISTS" && exit
 
-( set -x; github-create "$fullname" ) || exit
+( set -x; python3 "${BASH_SOURCE[0]%/*}"/create.py )

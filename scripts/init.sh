@@ -7,6 +7,7 @@
 ( set -x; bash ~/git/readme-generator/scripts/init.sh )
 [[ $PWD == *.py ]] && {
   unlicense-text > UNLICENSE
-  ( set -x; setup_generator.py > setup.py ) || exit
+  ( set -x; bash ~/git/repo-scripts/scripts/python/requirements/init.sh ) || exit
+  ( set -x; bash ~/git/repo-scripts/scripts/python/setup/init.sh ) || exit
   ( set -x; bash ~/git/pypi-metadata/scripts/init.sh ) || exit
 };:

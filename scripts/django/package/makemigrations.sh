@@ -13,12 +13,10 @@ set -- "$app"
 
 ( set -x; python3 -m pip uninstall -y "$app" ) || exit
 ( set -x; find . -type d -name "*.egg-info" -exec rm -fr {} \; )
-( set -x; repo-python-setup-init ) || exit
 ( set -x; python3 -m pip install --isolated -e . ) || exit
 
 ( set -x; find . -type d -name migrations -exec rm -fr {} \; )
 django_admin_path="$(which django-admin.py)" || exit
 # https://docs.djangoproject.com/en/dev/ref/django-admin/#django-admin-makemigrations
 # To add migrations to an app that doesn’t have a migrations directory, run makemigrations with the app’s app_label
-( set -x; django-admin makemigrations django_view_error "$app" ) || exit
-( set -x; repo-python-setup-init ) || exit
+( set -x; django-admin makemigrations "$app" ) || exit

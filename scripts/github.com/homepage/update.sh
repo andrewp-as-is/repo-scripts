@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 { set +x; } 2>/dev/null
 
-( set -x; repo-github-homepage )
+( set -x; python ~/git/github-metadata/scripts/update-homepage.py )

@@ -8,4 +8,5 @@ NGROK_WEBPACK_TUNNEL="$(curl -s http://localhost:4040/api/tunnels | jq '.tunnels
 [[ -n "$NGROK_WEBPACK_TUNNEL" ]] && {
     { set -x; export NGROK_WEBPACK_TUNNEL=$NGROK_WEBPACK_TUNNEL; { set +x; } 2>/dev/null; }
 }
+( set -x; killall webpack )
 ( set -x; webpack serve --config assets/webpack-config/dev.js --mode=none )

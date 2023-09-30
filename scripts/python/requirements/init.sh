@@ -8,10 +8,10 @@
 
 ! [ -e setup.py ] && echo "SKIP ($PWD): setup.py NOT EXISTS" && exit
 
-. ~/.bashrc
+pipreqs --no-follow-links --force --print . |awk -F= '{print $1}' | grep -v ^configurations | grep -v ^$ > requirements.txt
 
-pipreqs --force --print . |awk -F= '{print $1}' | grep -v ^configurations | grep -v ^$ > requirements.txt
-
-( set -x; cat "$dst" ) || exit
-! [ -s requirements.txt ] && { ( set -x; rm requirements.txt ) || exit; };:
+export LC_COLLATE="en_US.UTF-8"
+( set -x; sort --ignore-case -u -o requirements.txt{,} ) || exit
+! [ -s requirements.txt ] && { ( set -x; rm requirements.txt ) || exit; }
+[ -e requirements.txt ] && ( set -x; cat requirements.txt );:
 
